@@ -1,2 +1,3 @@
 zhconv
 transformers
+torch
