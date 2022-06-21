@@ -17,7 +17,7 @@ class BertDataset(Dataset):
 
     def __getitem__(self, idx):
         item = {key: torch.LongTensor(val[idx]) for key, val in self.encodings.items()}
-        item['label'] = self.labs[idx]
+        item['label'] = torch.LongTensor([float(i) for i in self.labs])[idx]
         return item
 
     def __len__(self):
@@ -26,7 +26,7 @@ class BertDataset(Dataset):
 
 if __name__ == '__main__':
 
-    dats = [i.strip().split('\t') for i in open('../resources/data/THUCNews/data/train.txt')]
+    dats = [i.strip().split('\t') for i in open('../resources/data/THUCNews/data/train3.txt')]
     texts = [str(i[0]) for i in dats]
     train_labs = [i[1] for i in dats]
 
