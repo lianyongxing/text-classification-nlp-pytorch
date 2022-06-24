@@ -1,38 +1,19 @@
 # -*- coding: utf-8 -*-
 # @Time    : 6/20/22 8:15 PM
 # @Author  : LIANYONGXING
-# @FileName: train_and_eval.py
+# @FileName: train_norm.py
 # @Software: PyCharm
 # @Repo    : https://github.com/lianyongxing/text-classification-nlp-pytorch
 import time
 import torch
 from torch.utils.data import DataLoader
-from datasets import load_metric
 from model.bert.model import Bert
 from dataset.bert_dataset import BertDataset
 import torch.nn as nn
 from transformers import AdamW, get_cosine_schedule_with_warmup
 from tqdm import tqdm
-from sklearn.metrics import accuracy_score
 from accelerate import Accelerator
-
-
-def eval(model, dev_loader):
-    model.eval()
-
-    dev_metric = load_metric('f1')
-    val_true = []
-    val_pred = []
-    for idx, batch in enumerate(dev_loader):
-        inputs = {k: v for k, v in batch.items() if k != 'label'}
-        y = batch['label']
-        y_pred = model(**inputs)
-        y_pred_lab = torch.argmax(y_pred, dim=-1).detach().cpu().numpy().tolist()
-        val_true.extend(y)
-        val_pred.extend(y_pred_lab)
-        dev_metric.add_batch(predictions=y_pred_lab, references=y)
-    dev_f1 = dev_metric.compute(average="macro")['f1']
-    return accuracy_score(val_true, val_pred), dev_f1
+from evaluation import eval
 
 
 def train(model, train_loader, dev_loader, criterion, optimizer, scheduler, epoch):
@@ -81,7 +62,7 @@ def train(model, train_loader, dev_loader, criterion, optimizer, scheduler, epoc
 if __name__ == "__main__":
 
     # define model
-    bert_path = "/Users/user/Desktop/git_projects/text-classification-nlp-pytorch/resources/chinese_bert"
+    bert_path = "../resources/chinese_bert"
     m = Bert(bert_path, classes=10)
 
     # define data
