@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 6/22/22 3:06 PM
 # @Author  : LIANYONGXING
-# @FileName: semi_supervised_dataset.py
+# @FileName: pi_model_dataset.py
 # @Software: PyCharm
 # @Repo    : https://github.com/lianyongxing/text-classification-nlp-pytorch
 

@@ -4,7 +4,7 @@
 # @FileName: train_pi_model.py
 # @Software: PyCharm
 # @Repo    : https://github.com/lianyongxing/text-classification-nlp-pytorch
-from dataset.semi_supervised_dataset import PiModelDataset
+from dataset.pi_model_dataset import PiModelDataset
 from transformers import BertTokenizer, AdamW, get_cosine_schedule_with_warmup
 from torch.utils.data import DataLoader
 import torch
