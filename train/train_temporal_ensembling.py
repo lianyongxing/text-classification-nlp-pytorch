@@ -4,6 +4,9 @@
 # @FileName: train_temporal_ensembling.py
 # @Software: PyCharm
 # @Repo    : https://github.com/lianyongxing/text-classification-nlp-pytorch
+import sys
+sys.path.append(r'..')
+
 import torch
 from torch.utils.data import DataLoader
 from transformers import BertTokenizer, AdamW, get_cosine_schedule_with_warmup
@@ -13,7 +16,8 @@ import numpy as np
 import torch.nn.functional as F
 
 
-def train_temporal_ensemble(model,
+def train_temporal_ensemble(model,ls
+
                             train_loader,
                             dev_loader,
                             optimizer,

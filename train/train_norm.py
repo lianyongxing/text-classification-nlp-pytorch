@@ -4,6 +4,9 @@
 # @FileName: train_norm.py
 # @Software: PyCharm
 # @Repo    : https://github.com/lianyongxing/text-classification-nlp-pytorch
+import sys
+sys.path.append(r'..')
+
 import time
 import torch
 from torch.utils.data import DataLoader
@@ -14,6 +17,7 @@ from transformers import AdamW, get_cosine_schedule_with_warmup
 from tqdm import tqdm
 from accelerate import Accelerator
 from evaluation import eval
+
 
 
 def train(model, train_loader, dev_loader, criterion, optimizer, scheduler, epoch):
