@@ -34,6 +34,19 @@ class Bert(nn.Module):
         logit = self.fc(out_pool)  # [bs, classes]
         return logit
 
+    def forward_sentence_mixup(self, batch1, batch2, lam):
+        logs1 = self.forward(**batch1)
+        logs2 = self.forward(**batch2)
+        y = lam*logs1 + (1-lam)*logs2
+        return y
+
+    def forward_encoder_mixup(self, batch1, batch2, lam):
+        out_pool1 = self.bert(**batch1)[1]
+        out_pool2 = self.bert(**batch2)[1]
+        pooled_output = lam * out_pool1 + (1.0-lam) * out_pool2
+        y = self.fc(pooled_output)
+        return y
+
     def predict(self, raw_text):
         text = text_filter(raw_text)
         if text == "":
