@@ -4,6 +4,7 @@
 
 Text-classification-nlp-pytorch is used for exploring text classification methods with pytorch.
 
+文本分类、半监督、小样本学习、样本增强
 ## 基础文本分类-Base
 
 基础文本分类
