@@ -74,3 +74,4 @@ if __name__ == "__main__":
     model.eval()
     result = model.predict("今天真是个好天气")
     print(result)
+    print(model)
